@@ -26,6 +26,8 @@ namespace karachun_map.Data.ViewModels.Input
 
         public IFormFileCollection Pictures { get; set; }
 
-        public IFormFile Audio { get; set; }
+        public IFormFile AudioGuide { get; set; }
+
+        public IFormFile AudioHistory { get; set; }
     }
 }
