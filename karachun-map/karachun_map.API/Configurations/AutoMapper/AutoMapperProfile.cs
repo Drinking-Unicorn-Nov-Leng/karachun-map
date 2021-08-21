@@ -87,7 +87,11 @@ namespace karachun_map.API.Configurations.AutoMapper
                 .ForMember(x => x.Avatar, s => s.MapFrom(x => x.Avatar.Url))
                 .ForMember(x => x.Pictures, s => s.MapFrom(x => x.Pictures.Select(y => y.Url).ToList()));
 
-            CreateMap<TourInputDto, Tour>();
+            CreateMap<TourInputDto, Tour>()
+                .ForMember(x => x.Places, s => s.MapFrom(x => x.PlacesIds.Select(x => new Place()
+                {
+                    Id = x
+                })));
 
             CreateMap<PlaceInputDto, Place>();
 

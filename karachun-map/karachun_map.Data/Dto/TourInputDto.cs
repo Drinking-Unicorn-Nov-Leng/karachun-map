@@ -22,6 +22,6 @@ namespace karachun_map.Data.Dto
 
         public Attachment Avatar { get; set; }
 
-        public IList<Attachment> Pictures { get; set; }
+        public List<Attachment> Pictures { get; set; }
     }
 }

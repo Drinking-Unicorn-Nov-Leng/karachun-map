@@ -40,7 +40,14 @@ namespace karachun_map.BI.Services
 
         public async Task<bool> UpdateTour(TourInputDto model)
         {
-            throw new NotImplementedException();
+            var entity = await _context.Tours.SingleOrDefaultAsync(x =>x.Id == model.Id);
+            if (entity == null)
+                return false;
+
+            entity.Name = String.IsNullOrEmpty(model.Name) ? entity.Name : model.Name;
+            entity.Pictures = model.Pictures.Count > 0 ? _mapper.Map<List<Data.Base.Attachment>, List<Data.Entity.Attachment>>(model.Pictures) : entity.Pictures;
+
+            return true;
         }
 
         public async Task<TourOutputDto> Get(int id)
