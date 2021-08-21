@@ -10,6 +10,9 @@ using karachun_map.Data.Enums;
 using karachun_map.EF;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using karachun_map.Data.Entity;
+using karachun_map.General.Expansions;
+using karachun_map.Data.Filters;
 
 namespace karachun_map.BI.Services
 {
@@ -24,24 +27,45 @@ namespace karachun_map.BI.Services
             _context = context;
         }
 
-        public async Task<bool> Add()
+        public async Task<bool> CreateTour(TourInputDto model)
+        {
+            var entity = _mapper.Map<Tour>(model);
+            await _context.AddAsync(entity);
+
+            if (await _context.SaveChangesAsync() > 0)
+                return true;
+
+            return false;
+        }
+
+        public async Task<bool> UpdateTour(TourInputDto model)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> Get(int id)
+        public async Task<TourOutputDto> Get(int id)
         {
-            throw new NotImplementedException();
+            var entity = GetTours.FirstOrDefaultAsync(x => x.Id == id);
+            if (entity is null)
+                return null;
+            return _mapper.Map<TourOutputDto>(entity);
         }
 
-        public async Task<bool> GetAll(TourFilter filter)
+        public async Task<IList<TourOutputDto>> GetAll(TourFilter filter)
         {
-            throw new NotImplementedException();
+            var entity = GetTours.Filter(filter);
+
+            return _mapper.Map<List<Tour>, List<TourOutputDto>>(await entity.ToListAsync());
         }
 
-        public async Task<bool> Update()
-        {
-            throw new NotImplementedException();
-        }
+        #region GetTours
+
+        private IQueryable<Tour> GetTours =>
+                 _context.Tours
+                            .Include(x => x.Places)
+                            .Include(x => x.Avatar)
+                            .Include(x => x.Pictures);
+
+        #endregion
     }
 }

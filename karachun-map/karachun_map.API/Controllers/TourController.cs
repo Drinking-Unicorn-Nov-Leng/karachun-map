@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using karachun_map.Data.Base;
 using karachun_map.BI.Interfaces;
 using karachun_map.Data.Dto;
+using karachun_map.Data.Filters;
 using karachun_map.Data.ViewModels.Input;
 
 namespace karachun_map.API.Controllers
@@ -43,13 +44,18 @@ namespace karachun_map.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromForm] )
+        public async Task<IActionResult> Add([FromForm] TourCreate model)
         {
-            return Ok();
+            var result = await _tours.CreateTour(_mapper.Map<TourDto>(model));
+
+            if (!result)
+                return BadRequest("Непредвиденная ошибка!");
+
+            return Ok(result);
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update([FromForm] TourUpdate model)
         {
             return Ok();
         }

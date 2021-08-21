@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using karachun_map.Data.Dto;
+using karachun_map.Data.Filters;
 
 namespace karachun_map.BI.Interfaces
 {
     public interface ITours
     {
-        Task<bool> Add();
+        Task<bool> CreateTour(TourInputDto model);
 
-        Task<bool> Update();
+        Task<bool> UpdateTour(TourInputDto model);
 
-        Task<bool> Get(int id);
+        Task<TourOutputDto> Get(int id);
 
-        Task<bool> GetAll(TourFilter filter);
+        Task<IList<TourOutputDto>> GetAll(TourFilter filter);
     }
 }

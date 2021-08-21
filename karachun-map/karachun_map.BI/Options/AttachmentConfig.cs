@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace karachun_map.BI.Options
 {
-    public class Config
+    public class AttachmentConfig
     {
-        public AttachmentConfig AttachmentService { get; set; }
+        public string Url { get; set; }
+
+        public string Token { get; set; }
     }
 }

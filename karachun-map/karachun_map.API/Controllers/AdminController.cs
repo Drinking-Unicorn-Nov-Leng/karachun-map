@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using karachun_map.Data.ViewModels.Input;
 using karachun_map.BI.Interfaces;
+using karachun_map.Data.Dto;
 
 namespace karachun_map.API.Controllers
 {
@@ -31,13 +32,23 @@ namespace karachun_map.API.Controllers
         [HttpPost("add-place")]
         public async Task<IActionResult> AddPlace([FromForm] PlaceCreate model)
         {
-            return Ok();
+            var result = await _admin.CreatePlace(_mapper.Map<PlaceInputDto>(model));
+
+            if (!result)
+                return BadRequest("Непредвиденная ошибка!");
+
+            return Ok(result);
         }
 
         [HttpPost("update-place")]
         public async Task<IActionResult> UpdatePlace([FromForm] PlaceCreate model)
         {
-            return Ok();
+            var result = await _admin.UpdatePlace(_mapper.Map<PlaceInputDto>(model));
+
+            if (!result)
+                return BadRequest("Непредвиденная ошибка!");
+
+            return Ok(result);
         }
     }
 }

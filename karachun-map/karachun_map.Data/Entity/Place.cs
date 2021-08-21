@@ -1,24 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using karachun_map.Data.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace karachun_map.Data.Entity
 {
-    public class Tour : Base2
+    public class Place : Base
     {
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        public IList<Place> Places { get; set; }
+        public string SmallDescription { get; set; }
+
+        [Column(TypeName = "varchar(24)")]
+        public PointType Type { get; set; }
+
+        public Coordinates Coordinates { get; set; }
 
         public Attachment Avatar { get; set; }
 
         public IList<Attachment> Pictures { get; set; }
 
-        [Column(TypeName = "varchar(24)")]
-        public TourType TypeCreator { get; set; }
+        public Attachment AudioGuide { get; set; }
+
+        public Attachment AudioHistory { get; set; }
     }
 }

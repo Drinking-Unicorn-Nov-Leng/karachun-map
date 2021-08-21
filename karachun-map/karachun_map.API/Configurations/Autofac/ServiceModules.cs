@@ -15,7 +15,7 @@ namespace karachun_map.API.Configurations.Autofac
         {
             base.Load(builder);
 
-            builder.RegisterType<Admin>()
+            builder.RegisterType<Places>()
                 .As<IAdmin>();
 
             builder.RegisterType<Places>()
@@ -26,6 +26,11 @@ namespace karachun_map.API.Configurations.Autofac
 
             builder.RegisterType<DataSend>()
                 .As<IDataSend>();
+
+            builder.RegisterType<Attachments>()
+                .As<IAttachments>();
+
+            builder.RegisterType<FormatterFileToAttachment>();
 
             builder.Register(context => new MapperConfiguration(cfg =>
             {

@@ -12,6 +12,10 @@ namespace karachun_map.EF
     public partial class ServiceDbContext : DbContext
     {
 
+        public DbSet<Tour> Tours { get; set; }
+
+        public DbSet<Place> Places { get; set; }
+
         public ServiceDbContext(DbContextOptions<ServiceDbContext> option) : base(option)
         {
             Database.EnsureCreated();

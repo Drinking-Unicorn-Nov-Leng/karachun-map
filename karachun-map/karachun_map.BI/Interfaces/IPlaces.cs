@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using karachun_map.Data.Dto;
 using karachun_map.Data.Base;
+using karachun_map.Data.Filters;
 
 namespace karachun_map.BI.Interfaces
 {
     public interface IPlaces
     {
-        Task<PlaceDto> Get(int id);
+        Task<PlaceOutputDto> Get(int id);
 
-        Task<IList<PlaceDto>> GetAll(Filter filter);
+        Task<IList<PlaceSmallDto>> GetAll(PlaceFilter filter);
 
-        Task<IList<PlaceDto>> GetAllFull(Filter filter);
+        Task<IList<PlaceOutputDto>> GetAllFull(PlaceFilter filter);
     }
 }

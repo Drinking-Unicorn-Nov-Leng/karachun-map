@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace karachun_map.BI.Options
+namespace karachun_map.Data.Enums
 {
-    public class Config
+    public enum TourType
     {
-        public AttachmentConfig AttachmentService { get; set; }
+        TourOperator,
+        ByUser
     }
 }

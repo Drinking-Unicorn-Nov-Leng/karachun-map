@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using karachun_map.Data.Base;
+using karachun_map.Data.Filters;
 using karachun_map.BI.Interfaces;
 
 namespace karachun_map.API.Controllers
@@ -29,21 +30,27 @@ namespace karachun_map.API.Controllers
         }
 
         [HttpGet("all")]
-        public async Task<IActionResult> GetAll([FromQuery] Filter filter)
+        public async Task<IActionResult> GetAll([FromQuery] PlaceFilter filter)
         {
-            return Ok();
+            var result = await _place.GetAll(filter);
+
+            return Ok(result);
         }
 
         [HttpGet("all/full-data")]
-        public async Task<IActionResult> GetFullData([FromQuery] Filter filter)
+        public async Task<IActionResult> GetFullData([FromQuery] PlaceFilter filter)
         {
-            return Ok();
+            var result = await _place.GetAllFull(filter);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPlace(int id)
         {
-            return Ok();
+            var result = await _place.Get(id);
+
+            return Ok(result);
         }
     }
 }

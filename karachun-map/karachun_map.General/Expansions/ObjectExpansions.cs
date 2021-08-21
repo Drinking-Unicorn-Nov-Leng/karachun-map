@@ -14,5 +14,7 @@ namespace karachun_map.General.Expansions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             });
+
+        public static IList<T> ToListOrNull<T>(this IEnumerable<T> data) => data is null ? null : data.ToList();
     }
 }

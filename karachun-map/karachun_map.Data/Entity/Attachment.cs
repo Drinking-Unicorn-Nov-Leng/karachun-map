@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
-namespace karachun_map.Data.Base
+namespace karachun_map.Data.Entity
 {
-    public class Attachment
+    public class Attachment : Base
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
-        public Stream Stream { get; set; }
+        public string Url { get; set; }
     }
 }

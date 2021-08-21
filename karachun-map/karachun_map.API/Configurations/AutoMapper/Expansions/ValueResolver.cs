@@ -9,6 +9,8 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using karachun_map.BI.Interfaces;
+using karachun_map.Data.Base;
 
 namespace karachun_map.API.Configurations.AutoMapper
 {
@@ -25,6 +27,26 @@ namespace karachun_map.API.Configurations.AutoMapper
         {
             return result;
         }
+    }
+
+    public class FormatterFileToAttachment : IValueResolver<Data.Base.Attachment, Data.Entity.Attachment, string>
+    {
+        private readonly IAttachments _attachments;
+        private readonly IMapper _mapper;
+
+        public FormatterFileToAttachment(IAttachments attachments, IMapper mapper)
+        {
+            _attachments = attachments;
+            _mapper = mapper;
+        }
+
+        public string Resolve(Data.Base.Attachment source, Data.Entity.Attachment destination, string result, ResolutionContext context)
+        {
+            return DownloadFile(source).GetAwaiter().GetResult();
+        }
+
+        private async Task<string> DownloadFile(Data.Base.Attachment source) =>
+            await _attachments.Upload(source);
     }
 
 }

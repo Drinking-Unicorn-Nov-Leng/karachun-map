@@ -10,5 +10,10 @@ namespace karachun_map.BI.Interfaces
 {
     public interface IAdmin
     {
+        Task<bool> CreatePlace(PlaceInputDto place);
+
+        Task<bool> UpdatePlace(PlaceInputDto place);
+
+        Task<bool> RemovePlace(int id);
     }
 }
