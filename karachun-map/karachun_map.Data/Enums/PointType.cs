@@ -13,6 +13,8 @@ namespace karachun_map.Data.Enums
         Attraction,
         Character,
         Lutic,
-        BabaYaga
+        Sadko,
+        Hostel,
+        Cafe
     }
 }

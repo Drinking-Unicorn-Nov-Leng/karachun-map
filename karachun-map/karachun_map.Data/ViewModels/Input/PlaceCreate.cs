@@ -30,6 +30,8 @@ namespace karachun_map.Data.ViewModels.Input
         [Required(ErrorMessage = "У объекта должн быть выбран тип!")]
         public PointType Type { get; set; }
 
+        public string City { get; set; }
+
         public IFormFile Avatar { get; set; }
 
         public IFormFileCollection Pictures { get; set; }

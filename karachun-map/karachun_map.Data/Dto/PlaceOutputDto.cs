@@ -22,6 +22,8 @@ namespace karachun_map.Data.Dto
 
         public Coordinates Coordinates { get; set; }
 
+        public string City { get; set; }
+
         public string Avatar { get; set; }
 
         public IList<string> Pictures { get; set; }

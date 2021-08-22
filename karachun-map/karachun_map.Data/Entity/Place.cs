@@ -21,6 +21,8 @@ namespace karachun_map.Data.Entity
 
         public Coordinates Coordinates { get; set; }
 
+        public string City { get; set; }
+
         public Attachment Avatar { get; set; }
 
         public IList<Attachment> Pictures { get; set; }

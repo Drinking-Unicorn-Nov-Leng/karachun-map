@@ -18,7 +18,7 @@ namespace karachun_map.EF
 
         public ServiceDbContext(DbContextOptions<ServiceDbContext> option) : base(option)
         {
-           // Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
