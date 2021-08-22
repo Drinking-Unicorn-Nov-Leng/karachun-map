@@ -11,6 +11,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using karachun_map.BI.Interfaces;
 using karachun_map.Data.Base;
+using karachun_map.Data.Dto;
+using karachun_map.Data.Entity;
 
 namespace karachun_map.API.Configurations.AutoMapper
 {
@@ -49,4 +51,25 @@ namespace karachun_map.API.Configurations.AutoMapper
             await _attachments.Upload(source);
     }
 
+    public class FormatterPlaceIdToPlace : IValueResolver<TourInputDto, Tour, IList<Place>>
+    {
+        private readonly IPlaces _places;
+        private readonly IMapper _mapper;
+
+        public FormatterPlaceIdToPlace(IPlaces places, IMapper mapper)
+        {
+            _places = places;
+            _mapper = mapper;
+        }
+
+        public IList<Place> Resolve(TourInputDto source, Tour destination, IList<Place> result, ResolutionContext context)
+        {
+            return GetPlaces(source.PlacesIds).GetAwaiter().GetResult();
+        }
+
+        private async Task<IList<Place>> GetPlaces(int[] ids) =>
+            await _places.Get(ids);
+    }
 }
+
+//FormatterPlaceIdToPlace

@@ -13,6 +13,6 @@ namespace karachun_map.Data.Filters
     {
         public int IncludePlaceId { get; set; }
 
-        public override Expression<Func<Tour, bool>> Build() => x => x.Places.Any(y => y.Id == IncludePlaceId);
+        public override Expression<Func<Tour, bool>> Build() => IncludePlaceId > 0 ? x => x.Places.Any(y => y.Id == IncludePlaceId) : base.Build();
     }
 }

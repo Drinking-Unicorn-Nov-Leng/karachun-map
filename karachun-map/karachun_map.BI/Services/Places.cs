@@ -64,6 +64,14 @@ namespace karachun_map.BI.Services
             return _mapper.Map<PlaceOutputDto>(entity);
         }
 
+        public async Task<IList<Place>> Get(int[] ids)
+        {
+            var entities = await GetPlaces.Where(x => ids.Contains(x.Id)).ToListAsync();
+            if (entities is null || entities.Count == 0)
+                return null;
+            return entities;
+        }
+
         public async Task<IList<PlaceSmallDto>> GetAll(PlaceFilter filter)
         {
             var entity = GetPlaces.Filter(filter);

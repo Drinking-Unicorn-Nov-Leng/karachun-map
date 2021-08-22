@@ -38,6 +38,8 @@ namespace karachun_map.API.Configurations.Autofac
 
             builder.RegisterType<FormatterFileToAttachment>();
 
+            builder.RegisterType<FormatterPlaceIdToPlace>();
+
             builder.Register(context => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<AutoMapperProfile>();

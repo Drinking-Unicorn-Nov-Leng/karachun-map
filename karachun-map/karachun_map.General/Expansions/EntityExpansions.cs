@@ -19,7 +19,7 @@ namespace karachun_map.General.Expansions
             if (filter.Take > 0)
                 entity = entity.Take(filter.Take);
             else
-                entity = entity.Take(20);
+                entity = entity.Take(500);
 
             return entity.OrderByDescending(x => x.Id);
         }
