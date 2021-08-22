@@ -34,19 +34,23 @@ namespace karachun_map.API.Controllers
         [HttpGet("all")]
         public async Task<IActionResult> GetAll([FromQuery] TourFilter filter)
         {
-            return Ok();
+            var result = await _tours.GetAll(filter);
+
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetPlace(int id)
+        public async Task<IActionResult> GetTour(int id)
         {
-            return Ok();
+            var result = await _tours.Get(id);
+
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] TourCreate model)
         {
-            var result = await _tours.CreateTour(_mapper.Map<TourDto>(model));
+            var result = await _tours.CreateTour(_mapper.Map<TourInputDto>(model));
 
             if (!result)
                 return BadRequest("Непредвиденная ошибка!");

@@ -7,6 +7,8 @@ using karachun_map.Data.Base;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Http;
 using karachun_map.Data.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace karachun_map.Data.ViewModels.Input
 {
@@ -24,6 +26,7 @@ namespace karachun_map.Data.ViewModels.Input
         [Required(ErrorMessage = "У объекта должны быть назначены координаты!")]
         public Coordinates Coordinates { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         [Required(ErrorMessage = "У объекта должн быть выбран тип!")]
         public PointType Type { get; set; }
 

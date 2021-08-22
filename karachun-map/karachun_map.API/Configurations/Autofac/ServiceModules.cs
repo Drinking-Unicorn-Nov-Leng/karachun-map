@@ -21,6 +21,9 @@ namespace karachun_map.API.Configurations.Autofac
             builder.RegisterType<Places>()
                 .As<IPlaces>();
 
+            builder.RegisterType<Places>()
+                .As<IPlaceGeocoding>();
+
             builder.RegisterType<Tours>()
                 .As<ITours>();
 
@@ -29,6 +32,9 @@ namespace karachun_map.API.Configurations.Autofac
 
             builder.RegisterType<Attachments>()
                 .As<IAttachments>();
+
+            builder.RegisterType<Geocoding>()
+                .As<IGeocoding>();
 
             builder.RegisterType<FormatterFileToAttachment>();
 

@@ -16,7 +16,7 @@ using karachun_map.General.Expansions;
 
 namespace karachun_map.BI.Services
 {
-    public class Places : IPlaces, IAdmin
+    public class Places : IPlaces, IAdmin, IPlaceGeocoding
     {
         private readonly IMapper _mapper;
         private readonly ServiceDbContext _context;
@@ -58,7 +58,7 @@ namespace karachun_map.BI.Services
 
         public async Task<PlaceOutputDto> Get(int id)
         {
-            var entity = GetPlaces.FirstOrDefaultAsync(x => x.Id == id);
+            var entity = await GetPlaces.FirstOrDefaultAsync(x => x.Id == id);
             if (entity is null)
                 return null;
             return _mapper.Map<PlaceOutputDto>(entity);
@@ -76,6 +76,14 @@ namespace karachun_map.BI.Services
             var entity = GetPlaces.Filter(filter);
 
             return _mapper.Map<List<Place>, List<PlaceOutputDto>>(await entity.ToListAsync());
+        }
+
+        public async Task<Dictionary<int, Data.Base.Coordinates>> GetPlacesGeocords(Data.Base.Coordinates coornates)
+        {
+            var entity = await GetPlaces.Where(x => Math.Abs((x.Coordinates.Lat - (coornates.Lat + Data.Base.Coordinates._100MetrosForLat))) <= Data.Base.Coordinates._100MetrosForLat &&
+                                                            Math.Abs(x.Coordinates.Lng - (coornates.Lng + Data.Base.Coordinates._100MetrosForLng)) <= Data.Base.Coordinates._100MetrosForLng).ToDictionaryAsync(x => x.Id, s => _mapper.Map<Data.Base.Coordinates>(s.Coordinates));
+
+            return entity;
         }
 
         #region GetPlaces

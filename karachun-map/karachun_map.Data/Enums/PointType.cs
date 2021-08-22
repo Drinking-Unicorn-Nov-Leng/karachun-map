@@ -12,5 +12,7 @@ namespace karachun_map.Data.Enums
         Monument,
         Attraction,
         Character,
+        Lutic,
+        BabaYaga
     }
 }

@@ -52,7 +52,7 @@ namespace karachun_map.BI.Services
 
         public async Task<TourOutputDto> Get(int id)
         {
-            var entity = GetTours.FirstOrDefaultAsync(x => x.Id == id);
+            var entity = await GetTours.FirstOrDefaultAsync(x => x.Id == id);
             if (entity is null)
                 return null;
             return _mapper.Map<TourOutputDto>(entity);

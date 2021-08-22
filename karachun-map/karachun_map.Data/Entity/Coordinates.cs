@@ -9,9 +9,9 @@ namespace karachun_map.Data.Entity
     public class Coordinates : Base
     {
         //Широта 
-        public string Lat { get; set; }
+        public double Lat { get; set; }
 
         //Долгота
-        public string Lng { get; set; }
+        public double Lng { get; set; }
     }
 }
